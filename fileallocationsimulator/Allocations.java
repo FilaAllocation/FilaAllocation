@@ -38,8 +38,8 @@ public class Allocations {
 
             System.out.println(fileName + " " + "The block with number : " + startBlock + " is already allocated !");
             System.out.println("Want to enter another file ? ");
-            System.out.println("y for yes ");
-            System.out.println("n for no : ");
+            System.out.println("1 for yes ");
+            System.out.println("0 for no : ");
             int choice = ch.nextInt();
             if (choice == 1){
                 linkedAllocation(blocks);

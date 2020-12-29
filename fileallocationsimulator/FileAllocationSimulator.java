@@ -20,12 +20,13 @@ public class FileAllocationSimulator {
     public static void main(String[] args) {
         Scanner op = new Scanner(System.in);
         
-        System.out.println("Enter the number of operation : ");
-        System.out.println("1- Allocate a file in memory ");
-            System.out.println("2- exit");
+         System.out.println("Enter the number of operation : ");
+        System.out.println("1- Allocate a file in memory with Contigious memory allocation");
+        System.out.println("2- Allocate a file in memory with linkedlist allocation");
+        System.out.println("3- exit");
         int operation = op.nextInt();
         
-        while (operation != 2){ 
+        while (operation != 3){ 
             switch (operation) {
             case 1:
                  
@@ -71,7 +72,28 @@ public class FileAllocationSimulator {
         HDD.printFilesInMemory();
         
             case 2:
-                System.exit(0);
+                    Scanner sz = new Scanner(System.in);
+                    System.out.println("Enter the size of memory : ");
+                    int size = sz.nextInt();
+
+                    int blocks[] = new int[size];
+                    for (int i = 0; i < size; i++){
+                        blocks[i] = 0;
+                    }
+                    Allocations linked = new Allocations();
+
+                    linked.linkedAllocation(blocks);
+
+
+
+                case 3:
+
+
+
+                    System.exit(0);
+                default:
+                    System.out.println("Sorry this is not an option");
+                    System.exit(0);
         
             }
         

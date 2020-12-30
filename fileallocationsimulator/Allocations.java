@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Allocations {
 
-    public void linkedAllocation(int blocks[]){
+    public void linkedAllocation(int size, int blocks[]){
 
         Scanner sb = new Scanner(System.in);
         Scanner len = new Scanner(System.in);
@@ -22,15 +22,22 @@ public class Allocations {
         int actend = length + startBlock +1;
         int end = clen + startBlock;
         if (blocks[startBlock] == 0){
-            for (int i = startBlock;i < end;i++){
-                int randnum = startBlock + num.nextInt(actend);
+            blocks[startBlock]=1;
+            System.out.println(fileName + " " +startBlock + " ----> " + blocks[startBlock]);
+            for (int i = startBlock;i < end-1;i++){
+                int randnum = 0 + num.nextInt(size);
+
                 if (blocks[randnum] == 0){
                     blocks[randnum] = 1;
-                    System.out.println( fileName + " " + randnum + " ----> " + blocks[randnum]);
+                    System.out.println( fileName + " " + randnum + " ----> " + randnum);
                 }
                 else {
-                    System.out.println(fileName + " " + "Block number : " + randnum + " is already allocated !");
-                    clen++;
+                    while(blocks[randnum]==1){
+                        randnum = 0 + num.nextInt(size);
+                        clen++;
+                    }
+
+
                 }
             }
         }
@@ -42,7 +49,7 @@ public class Allocations {
             System.out.println("0 for no : ");
             int choice = ch.nextInt();
             if (choice == 1){
-                linkedAllocation(blocks);
+                linkedAllocation(size,blocks);
 
             }
             else  {

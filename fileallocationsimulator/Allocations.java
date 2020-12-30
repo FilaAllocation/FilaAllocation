@@ -2,8 +2,69 @@ package fileallocationsimulator.java;
 
 import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.Random;
+
+import static java.lang.System.exit;
 
 public class Allocations {
+    public int size;
+    public int [] blocks= new int[size];
+    public int [] indexBlock= new int [size];
+    int indexedBlock;
+
+    int numOfFiles;
+    Scanner ib = new Scanner(System.in); //s
+    Scanner nof = new Scanner(System.in);
+    void indexed() {
+        System.out.println("Enter size of memory : ");
+        int size = ib.nextInt();
+
+        int [] blocks = new int[size];
+        int [] indexBlock = new int[size];
+        System.out.println("Enter the index block");
+        indexedBlock = ib.nextInt();
+        if (blocks[indexedBlock] != 1) {
+            System.out.println("Enter the number of files needed for the index " + indexedBlock + " on the disk: ");
+            numOfFiles = nof.nextInt();
+            int flag = 0;
+            for (int i = 0; i < numOfFiles; i++) {
+                if (blocks[indexBlock[i]] == 0)
+                    flag++;
+            }
+            if (flag == numOfFiles) {
+                for (int j = 0; j < numOfFiles; j++) {
+                    blocks[indexBlock[j]] = 1;
+                }
+                System.out.println("Allocated");
+                System.out.println("File indexed");
+                for (int k = 0; k < numOfFiles; k++) {
+                    System.out.println(indexedBlock + "----->" + indexBlock[k] + " : " + blocks[indexBlock[k]]);
+                }
+            } else {
+                System.out.println("File in the index is already allocated");
+                System.out.println("Enter another indexed file");
+            }
+            System.out.println("Do you want to enter more files?");
+            System.out.println("Enter 1 for Yes, Enter 0 for No: ");
+            int ch;
+            ch = ib.nextInt();
+            if (ch == 1)
+                indexed();
+            else
+                exit(0);
+        } else {
+            System.out.println(indexedBlock + " is already taken");
+            indexed();
+        }
+
+       
+
+    }
+
+ 
+
+
 
     public void linkedAllocation(int size, int blocks[]){
 

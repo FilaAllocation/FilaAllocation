@@ -1,10 +1,3 @@
-package fileallocationsimulator.java;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
-
-
 public class FileAllocationSimulator {
 
     public static int size;
@@ -16,10 +9,11 @@ public class FileAllocationSimulator {
         System.out.println("Enter the number of operation : ");
         System.out.println("1- Allocate a file in memory with Contigious memory allocation");
         System.out.println("2- Allocate a file in memory with linkedlist allocation");
-        System.out.println("3- exit");
+	System.out.println("3- Allocate a file in memory with indexed allocation");
+        System.out.println("4- exit");
         int operation = op.nextInt();
 
-        while (operation != 3){
+        while (operation != 4){
             switch (operation) {
                 case 1:
 
@@ -80,8 +74,19 @@ public class FileAllocationSimulator {
 
 
                 case 3:
+ 
+                    Allocations menu = new Allocations();
 
 
+
+                    for (int i = 0; i < menu.size; i++) {
+                        menu.blocks[i] = 0;
+                        menu.indexed();
+                    }
+                    menu.indexed();
+
+
+case 4:
 
                     System.exit(0);
                 default:

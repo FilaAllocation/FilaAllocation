@@ -25,7 +25,7 @@ public class Allocations {
         int rand;
         Random randnum = new Random();
         if (blocks[indexedBlock] != 1) {
-            System.out.println("Enter the number of files needed for the index " + indexedBlock + " on the disk: ");
+            System.out.println("Enter the number of blocks needed for the index " + indexedBlock + " on the disk: ");
             numOfFiles = nof.nextInt();
             int flag = 0;
 

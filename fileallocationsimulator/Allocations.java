@@ -2,35 +2,38 @@ package fileallocationsimulator.java;
 
 import java.util.Scanner;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.Random;
 
 import static java.lang.System.exit;
 
 public class Allocations {
-    public int size;
-    public int [] blocks= new int[size];
-    public int [] indexBlock= new int [size];
+    //public int size;
+    //public int [] blocks= new int[size];
+    //public int [] indexBlock= new int [size];
     int indexedBlock;
 
     int numOfFiles;
     Scanner ib = new Scanner(System.in); //s
     Scanner nof = new Scanner(System.in);
-    void indexed() {
-        System.out.println("Enter size of memory : ");
-        int size = ib.nextInt();
+    void indexed(int size ,int blocks [] ,int indexBlock []) {
+        // System.out.println("Enter size of memory : ");
+        //int size = ib.nextInt();
 
-        int [] blocks = new int[size];
-        int [] indexBlock = new int[size];
+        //int [] blocks = new int[size];
+        //int [] indexBlock = new int[size];
         System.out.println("Enter the index block");
         indexedBlock = ib.nextInt();
+        int rand;
+        Random randnum = new Random();
         if (blocks[indexedBlock] != 1) {
             System.out.println("Enter the number of files needed for the index " + indexedBlock + " on the disk: ");
             numOfFiles = nof.nextInt();
             int flag = 0;
+
+
             for (int i = 0; i < numOfFiles; i++) {
                 if (blocks[indexBlock[i]] == 0)
                     flag++;
+                indexBlock[i] = 0 + randnum.nextInt(size);
             }
             if (flag == numOfFiles) {
                 for (int j = 0; j < numOfFiles; j++) {
@@ -50,28 +53,29 @@ public class Allocations {
             int ch;
             ch = ib.nextInt();
             if (ch == 1)
-                indexed();
+                indexed(size , blocks, indexBlock);
             else
                 exit(0);
         } else {
             System.out.println(indexedBlock + " is already taken");
-            indexed();
+            indexed(size , blocks, indexBlock);
         }
 
-       
+        // indexedAllocation(size , blocks, indexBlock);
 
     }
 
- 
 
 
 
-    public void linkedAllocation(int size, int blocks[]){
+
+    public void linkedAllocation(int size, int blocks[]) {
 
         Scanner sb = new Scanner(System.in);
         Scanner len = new Scanner(System.in);
         Scanner fn = new Scanner(System.in);
         Scanner ch = new Scanner(System.in);
+
         System.out.println("Enter the starting block number : ");
         int startBlock = sb.nextInt();
         System.out.println("Enter the name of the new file : ");
@@ -82,6 +86,8 @@ public class Allocations {
         int clen = length;
         int actend = length + startBlock +1;
         int end = clen + startBlock;
+        int index = 0;
+        int []randarr = new int [end];
         if (blocks[startBlock] == 0){
             blocks[startBlock]=1;
             System.out.println(fileName + " " +startBlock + " ----> " + blocks[startBlock]);
@@ -90,7 +96,11 @@ public class Allocations {
 
                 if (blocks[randnum] == 0){
                     blocks[randnum] = 1;
-                    System.out.println( fileName + " " + randnum + " ----> " + randnum);
+
+                    randarr[index] = randnum;
+                    index++;
+
+                //    System.out.println( fileName + " " + randnum + " ----> " + randnum);
                 }
                 else {
                     while(blocks[randnum]==1){
@@ -101,24 +111,27 @@ public class Allocations {
 
                 }
             }
+            for (int j =0;j < length -1; j++){
+                System.out.println(fileName + " " + randarr[j] + " ----> " + randarr[j+1]);
+            }
+            
         }
         else
 
             System.out.println(fileName + " " + "The block with number : " + startBlock + " is already allocated !");
-            System.out.println("Want to enter another file ? ");
-            System.out.println("1 for yes ");
-            System.out.println("0 for no : ");
-            int choice = ch.nextInt();
-            if (choice == 1){
-                linkedAllocation(size,blocks);
+        System.out.println("Want to enter another file ? ");
+        System.out.println("1 for yes ");
+        System.out.println("0 for no : ");
+        int choice = ch.nextInt();
+        if (choice == 1){
+            linkedAllocation(size,blocks);
 
-            }
-            else  {
-                System.exit (0);
-            }
+        }
+        else  {
+            System.exit (0);
+        }
 
 
 
     }
-
 }

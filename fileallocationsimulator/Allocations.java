@@ -90,7 +90,7 @@ public class Allocations {
         int []randarr = new int [end];
         if (blocks[startBlock] == 0){
             blocks[startBlock]=1;
-            System.out.println(fileName + " " +startBlock + " ----> " + blocks[startBlock]);
+            
             for (int i = startBlock;i < end-1;i++){
                 int randnum = 0 + num.nextInt(size);
 
@@ -111,6 +111,7 @@ public class Allocations {
 
                 }
             }
+            System.out.println(fileName + " " + startBlock + " ----> " + randarr[0]);
             for (int j =0;j < length -1; j++){
                 System.out.println(fileName + " " + randarr[j] + " ----> " + randarr[j+1]);
             }
